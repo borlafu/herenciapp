@@ -78,6 +78,10 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
   const segments = buildBarSegments(result.shares)
   const heirEntries = groupByHeir(result.shares)
 
+  const barAriaLabel = `Reparto de herencia: ${result.shares
+    .map(s => `${s.label} ${s.porcentaje.toFixed(1)}% en ${SHARE_LABELS[s.shareType]}`)
+    .join(', ')}`
+
   return (
     <section aria-label="Diagrama de reparto" className="w-full space-y-6">
       <h2 className="text-xl font-bold text-gray-900">Cómo se reparte la herencia</h2>
@@ -102,7 +106,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
         <div
           className="flex h-14 w-full rounded-lg overflow-hidden shadow-sm ring-1 ring-gray-200"
           role="img"
-          aria-label="Barra proporcional del reparto"
+          aria-label={barAriaLabel}
           onMouseLeave={() => setTooltipRows(null)}
         >
           {segments.map((seg, i) => {
@@ -116,7 +120,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
               return (
                 <div
                   key={i}
-                  className={`${SHARE_COLORS['pleno-dominio']} flex items-center justify-center text-white text-xs font-semibold cursor-default border-r-2 border-white/40 last:border-r-0 hover:brightness-110 transition-[filter]`}
+                  className={`${SHARE_COLORS['pleno-dominio']} flex items-center justify-center text-gray-900 text-xs font-semibold cursor-default border-r-2 border-white/40 last:border-r-0 hover:brightness-110 transition-[filter]`}
                   style={{ width: `${seg.share.porcentaje}%` }}
                   onMouseEnter={() => setTooltipRows(rows)}
                 >
@@ -141,7 +145,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
                   {seg.usufructoShares.map((s, j) => (
                     <div
                       key={j}
-                      className={`${SHARE_COLORS.usufructo} flex items-center justify-center text-white text-xs font-semibold border-b-2 border-white/40`}
+                      className={`${SHARE_COLORS.usufructo} flex items-center justify-center text-gray-900 text-xs font-semibold border-b-2 border-white/40`}
                       style={{ width: `${(s.porcentaje / seg.width) * 100}%` }}
                     >
                       {s.porcentaje >= 8 && `${s.porcentaje.toFixed(0)}%`}
@@ -152,7 +156,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
                   {seg.nudaShares.map((s, j) => (
                     <div
                       key={j}
-                      className={`${SHARE_COLORS['nuda-propiedad']} flex items-center justify-center text-white text-xs font-semibold`}
+                      className={`${SHARE_COLORS['nuda-propiedad']} flex items-center justify-center text-gray-900 text-xs font-semibold`}
                       style={{ width: `${(s.porcentaje / seg.width) * 100}%` }}
                     >
                       {s.porcentaje >= 8 && `${s.porcentaje.toFixed(0)}%`}
@@ -192,7 +196,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
       </ul>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-4 text-sm text-gray-700" aria-label="Leyenda">
+      <div role="group" aria-label="Leyenda" className="flex flex-wrap gap-4 text-sm text-gray-700">
         {(Object.keys(SHARE_COLORS) as HeirShare['shareType'][]).map(type => (
           <span key={type} className="flex items-center gap-1.5">
             <span className={`inline-block h-3 w-3 rounded-sm ${SHARE_COLORS[type]}`} aria-hidden="true" />

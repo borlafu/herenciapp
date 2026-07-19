@@ -64,9 +64,9 @@ export function SimulatorForm() {
         className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm space-y-6"
       >
         <div className="flex flex-wrap items-start gap-3">
-          <h1 className="text-2xl font-bold text-gray-900 leading-snug flex-1">
+          <h2 className="text-2xl font-bold text-gray-900 leading-snug flex-1">
             ¿Cómo se reparte la herencia?
-          </h1>
+          </h2>
           {presetActivo && (
             <span
               className="inline-flex items-center gap-1.5 rounded-full bg-green-100 border border-green-300 px-3 py-1 text-xs font-semibold text-green-800"
@@ -180,12 +180,14 @@ export function SimulatorForm() {
         </button>
       </form>
 
-      {result && (
-        <div className="space-y-6" aria-live="polite" aria-atomic="true">
-          <ResultSummary result={result} />
-          <ResultDiagram result={result} />
-        </div>
-      )}
+      <div aria-live="polite" aria-atomic="true">
+        {result && (
+          <div className="space-y-6">
+            <ResultSummary result={result} />
+            <ResultDiagram result={result} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
