@@ -35,6 +35,12 @@ export const GLOSSARY: GlossaryTerm[] = [
     definition:
       'Parte mínima de la herencia que la ley reserva obligatoriamente a los hijos/as. No puede quitarse en testamento.',
   },
+  {
+    id: 'reparto-legal',
+    label: 'Reparto legal español',
+    definition:
+      'Reparto por defecto según el Código Civil español: los descendientes reciben la herencia a partes iguales y el cónyuge viudo/a obtiene el usufructo del tercio de mejora. Es el caso más habitual cuando no hay testamento.',
+  },
 ]
 
 export function findTerm(id: string): GlossaryTerm | undefined {

@@ -13,7 +13,7 @@ interface FormState {
   tieneCopropiedad: boolean
 }
 
-const INITIAL: FormState = {
+const PRESET_LEGAL: FormState = {
   numDescendientes: '2',
   tieneConyuge: true,
   coeficienteCopropiedad: '50',
@@ -21,7 +21,8 @@ const INITIAL: FormState = {
 }
 
 export function SimulatorForm() {
-  const [form, setForm] = useState<FormState>(INITIAL)
+  const [form, setForm] = useState<FormState>(PRESET_LEGAL)
+  const [presetActivo, setPresetActivo] = useState(true)
   const [result, setResult] = useState<InheritanceResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -50,6 +51,10 @@ export function SimulatorForm() {
     }
   }
 
+  function handleDesactivarPreset() {
+    setPresetActivo(false)
+  }
+
   return (
     <div className="space-y-8">
       <form
@@ -58,12 +63,42 @@ export function SimulatorForm() {
         aria-label="Simulador de reparto de herencia"
         className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm space-y-6"
       >
-        <h1 className="text-2xl font-bold text-gray-900 leading-snug">
-          ¿Cómo se reparte la herencia?
-        </h1>
-        <p className="text-gray-600 text-base">
-          Rellena los datos y te explicamos el reparto en lenguaje claro.
-        </p>
+        <div className="flex flex-wrap items-start gap-3">
+          <h1 className="text-2xl font-bold text-gray-900 leading-snug flex-1">
+            ¿Cómo se reparte la herencia?
+          </h1>
+          {presetActivo && (
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full bg-green-100 border border-green-300 px-3 py-1 text-xs font-semibold text-green-800"
+              aria-label="Preset reparto legal activo"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500" aria-hidden="true" />
+              Preset legal
+            </span>
+          )}
+        </div>
+
+        {presetActivo ? (
+          <div className="rounded-lg bg-blue-50 border border-blue-100 px-4 py-3 text-sm text-blue-800 flex items-start gap-3">
+            <span className="mt-0.5 text-blue-500" aria-hidden="true">ℹ</span>
+            <div className="flex-1">
+              <strong className="font-semibold">Reparto legal español</strong> — 2 hijos/as, cónyuge
+              viudo/a con usufructo del tercio de mejora. Es el caso más habitual.{' '}
+              <button
+                type="button"
+                className="underline decoration-dotted hover:text-blue-900 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
+                onClick={handleDesactivarPreset}
+                aria-label="Desactivar preset y configurar manualmente"
+              >
+                Configurar manualmente
+              </button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-gray-600 text-base">
+            Rellena los datos y te explicamos el reparto en lenguaje claro.
+          </p>
+        )}
 
         {/* Descendientes */}
         <div className="space-y-1">
