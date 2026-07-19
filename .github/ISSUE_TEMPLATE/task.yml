@@ -1,0 +1,35 @@
+name: Tarea técnica
+description: Trabajo de infraestructura, refactor o deuda técnica
+title: "[task] "
+labels: ["tarea-tecnica"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: Qué hay que hacer y por qué.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivación
+      description: Deuda técnica, mejora de arquitectura, requisito de infra, etc.
+    validations:
+      required: true
+  - type: input
+    id: arch_ref
+    attributes:
+      label: Referencia ARCHITECTURE.md
+      description: Sección relevante (si aplica).
+  - type: dropdown
+    id: fase
+    attributes:
+      label: Fase
+      options:
+        - mvp
+        - fase-2
+        - fase-3
+        - fase-4
+    validations:
+      required: true

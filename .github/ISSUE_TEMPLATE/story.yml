@@ -1,0 +1,44 @@
+name: User Story
+description: Nueva funcionalidad desde la perspectiva del usuario
+title: "[story] "
+labels: ["story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa este template para proponer funcionalidades de producto.
+  - type: textarea
+    id: story
+    attributes:
+      label: Historia de usuario
+      description: "Como [tipo de usuario], quiero [objetivo], para [beneficio]."
+      placeholder: "Como persona mayor que ha heredado, quiero ver el reparto en un diagrama claro, para entender qué parte me corresponde sin necesitar un abogado."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios de aceptación
+      description: Lista de condiciones que deben cumplirse para cerrar el issue.
+      placeholder: |
+        - [ ] El diagrama muestra los porcentajes de cada heredero
+        - [ ] El texto usa lenguaje llano (sin tecnicismos sin explicar)
+    validations:
+      required: true
+  - type: input
+    id: prd_ref
+    attributes:
+      label: Referencia PRD
+      description: Sección del PRD.md que cubre esta historia.
+      placeholder: "PRD § 5 — Alcance funcional del MVP"
+  - type: dropdown
+    id: fase
+    attributes:
+      label: Fase
+      options:
+        - mvp
+        - fase-2
+        - fase-3
+        - fase-4
+    validations:
+      required: true
