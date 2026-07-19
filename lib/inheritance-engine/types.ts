@@ -1,4 +1,4 @@
-export type ShareType = 'plena-propiedad' | 'nuda-propiedad' | 'usufructo'
+export type ShareType = 'pleno-dominio' | 'nuda-propiedad' | 'usufructo'
 
 export type CasoHerencia =
   | 'descendientes-conyuge'

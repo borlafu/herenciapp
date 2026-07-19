@@ -6,8 +6,8 @@ export interface GlossaryTerm {
 
 export const GLOSSARY: GlossaryTerm[] = [
   {
-    id: 'propiedad-plena',
-    label: 'Propiedad plena',
+    id: 'pleno-dominio',
+    label: 'Pleno dominio',
     definition:
       'Ser dueño/a completo del bien: puedes usarlo, obtener rentas y venderlo libremente.',
   },

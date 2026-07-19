@@ -14,21 +14,26 @@ function buildSummary(result: InheritanceResult): React.ReactNode {
       <p>
         La herencia se reparte entre {n} {n === 1 ? 'hijo/a' : 'hijos/as'} a partes iguales.
         Cada uno/a recibe el {shares[0].porcentaje.toFixed(1)}% en{' '}
-        <GlossaryTooltip termId="propiedad-plena">propiedad plena</GlossaryTooltip>, lo que
-        significa que pueden usar el bien, alquilarlo o venderlo libremente.
+        <GlossaryTooltip termId="pleno-dominio">pleno dominio</GlossaryTooltip>, lo que significa
+        que pueden usar el bien, alquilarlo o venderlo libremente.
       </p>
     )
   }
 
   if (caso === 'descendientes-conyuge') {
+    const nudaShare = shares.find(s => s.shareType === 'nuda-propiedad')
+    const usufructoShare = shares.find(s => s.shareType === 'usufructo')
     return (
       <p>
-        Los {n} {n === 1 ? 'hijo/a hereda' : 'hijos/as heredan'} la{' '}
-        <GlossaryTooltip termId="nuda-propiedad">nuda propiedad</GlossaryTooltip> a partes
-        iguales ({shares[0].porcentaje.toFixed(1)}% cada uno/a). El/la cónyuge viudo/a recibe el{' '}
+        El/la cónyuge viudo/a recibe el{' '}
         <GlossaryTooltip termId="usufructo">usufructo</GlossaryTooltip> del{' '}
-        <GlossaryTooltip termId="tercio-mejora">tercio de mejora</GlossaryTooltip> (un tercio de
-        la herencia), lo que le permite vivir en el inmueble o cobrar el alquiler de por vida.
+        <GlossaryTooltip termId="tercio-mejora">tercio de mejora</GlossaryTooltip> (
+        {usufructoShare?.porcentaje.toFixed(1)}% de la propiedad), lo que le permite vivir en el
+        inmueble o cobrar el alquiler de por vida. Los {n}{' '}
+        {n === 1 ? 'hijo/a recibe' : 'hijos/as reciben'} la{' '}
+        <GlossaryTooltip termId="nuda-propiedad">nuda propiedad</GlossaryTooltip> de ese tercio (
+        {nudaShare?.porcentaje.toFixed(1)}% cada uno/a) y el{' '}
+        <GlossaryTooltip termId="pleno-dominio">pleno dominio</GlossaryTooltip> del resto.
       </p>
     )
   }

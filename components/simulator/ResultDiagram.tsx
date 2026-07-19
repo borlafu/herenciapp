@@ -1,13 +1,13 @@
 import type { HeirShare, InheritanceResult } from '@/lib/inheritance-engine/types'
 
 const SHARE_COLORS: Record<HeirShare['shareType'], string> = {
-  'plena-propiedad': 'bg-blue-500',
+  'pleno-dominio': 'bg-blue-500',
   'nuda-propiedad': 'bg-indigo-400',
   usufructo: 'bg-amber-400',
 }
 
 const SHARE_LABELS: Record<HeirShare['shareType'], string> = {
-  'plena-propiedad': 'Propiedad plena',
+  'pleno-dominio': 'Pleno dominio',
   'nuda-propiedad': 'Nuda propiedad',
   usufructo: 'Usufructo',
 }
