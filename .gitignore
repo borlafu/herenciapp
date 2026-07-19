@@ -51,3 +51,6 @@ next-env.d.ts
 .claude/plugin.json
 .claude/PLUGIN_SCHEMA_NOTES.md
 .claude/settings.local.json
+.claude/agents/
+.claude/rules/
+.claude/ecc/
