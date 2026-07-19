@@ -1,0 +1,359 @@
+# Instincts generated from https://github.com/borlafu/herenciapp
+# Generated: 2026-07-19T18:47:59.158Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: herenciapp-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: test
+
+## Evidence
+
+- 1 commits analyzed
+- Detected conventional commit pattern
+- Examples: test: añadir tests de componentes React (SimulatorForm, ResultDiagram, GlossaryTooltip)
+
+---
+id: herenciapp-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Commit Length
+
+## Action
+
+Write moderate-length commit messages (~87 characters)
+
+## Evidence
+
+- Average commit message length: 87 chars
+- Based on 1 commits
+
+---
+id: herenciapp-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: herenciapp-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: herenciapp-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: herenciapp-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Test Framework
+
+## Action
+
+Use jest as the test framework
+
+## Evidence
+
+- Test framework detected: jest
+- File pattern: *.test.tsx
+
+---
+id: herenciapp-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/borlafu/herenciapp
+---
+
+# Herenciapp Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.tsx
+
+## Evidence
+
+- File pattern: *.test.tsx
+- Consistent across test files
+
+---
+id: herenciapp-instinct-file-naming
+trigger: "When creating a new file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct File Naming
+
+## Action
+
+Name the file using PascalCase (e.g., MyComponent.tsx)
+
+## Evidence
+
+- Pattern in namingConventions.files: PascalCase
+
+---
+id: herenciapp-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Function Naming
+
+## Action
+
+Name the function using camelCase (e.g., calculateResult)
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: herenciapp-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Class Naming
+
+## Action
+
+Name the class using PascalCase (e.g., ResultDiagram)
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: herenciapp-instinct-constant-naming
+trigger: "When declaring a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Constant Naming
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE (e.g., MAX_ATTEMPTS)
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: herenciapp-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Import Style
+
+## Action
+
+Use relative import paths (e.g., import X from '../X')
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: herenciapp-instinct-export-style
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Export Style
+
+## Action
+
+Use named exports (e.g., export { MyComponent })
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: herenciapp-instinct-test-file-pattern
+trigger: "When creating a test file"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Test File Pattern
+
+## Action
+
+Name the file with the pattern *.test.tsx
+
+## Evidence
+
+- Pattern in testing.filePattern: *.test.tsx
+
+---
+id: herenciapp-instinct-test-framework
+trigger: "When writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Test Framework
+
+## Action
+
+Use Jest as the testing framework
+
+## Evidence
+
+- Pattern in testing.framework: jest
+
+---
+id: herenciapp-instinct-test-type
+trigger: "When writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Test Type
+
+## Action
+
+Write unit tests for components and functions
+
+## Evidence
+
+- Pattern in testing.testTypes: unit
+- Seen in commit: test: añadir tests de componentes React (SimulatorForm, ResultDiagram, GlossaryTooltip)
+
+---
+id: herenciapp-instinct-test-location
+trigger: "When adding tests"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Test Location
+
+## Action
+
+Place test files in mixed locations (not strictly separated from source files)
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation: mixed
+
+---
+id: herenciapp-instinct-git-commit-format
+trigger: "When making a commit"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: borlafu/herenciapp
+---
+
+# Herenciapp Instinct Git Commit Format
+
+## Action
+
+Use the conventional commit format with a prefix (e.g., test: description)
+
+## Evidence
+
+- Pattern in commits.type: conventional
+- Pattern in commits.prefixes: ["test"]
+- Seen in commit: test: añadir tests de componentes React (SimulatorForm, ResultDiagram, GlossaryTooltip)
+
