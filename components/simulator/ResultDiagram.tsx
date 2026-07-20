@@ -124,7 +124,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
                   style={{ width: `${seg.share.porcentaje}%` }}
                   onMouseEnter={() => setTooltipRows(rows)}
                 >
-                  {seg.share.porcentaje >= 12 && `${seg.share.porcentaje.toFixed(0)}%`}
+                  {seg.share.porcentaje >= 10 && `${seg.share.porcentaje.toFixed(0)}%`}
                 </div>
               )
             }
@@ -148,7 +148,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
                       className={`${SHARE_COLORS.usufructo} flex items-center justify-center text-gray-900 text-xs font-semibold border-b-2 border-white/40`}
                       style={{ width: `${(s.porcentaje / seg.width) * 100}%` }}
                     >
-                      {s.porcentaje >= 8 && `${s.porcentaje.toFixed(0)}%`}
+                      {s.porcentaje >= 5 && `${s.porcentaje.toFixed(0)}%`}
                     </div>
                   ))}
                 </div>
@@ -159,7 +159,7 @@ export function ResultDiagram({ result }: ResultDiagramProps) {
                       className={`${SHARE_COLORS['nuda-propiedad']} flex items-center justify-center text-gray-900 text-xs font-semibold`}
                       style={{ width: `${(s.porcentaje / seg.width) * 100}%` }}
                     >
-                      {s.porcentaje >= 8 && `${s.porcentaje.toFixed(0)}%`}
+                      {s.porcentaje >= 5 && `${s.porcentaje.toFixed(0)}%`}
                     </div>
                   ))}
                 </div>
