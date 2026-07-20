@@ -8,6 +8,7 @@ const config: Config = {
     '^@/(.*)$': '<rootDir>/$1',
   },
   testMatch: ['**/*.test.ts', '**/*.test.tsx'],
+  testPathIgnorePatterns: ['/node_modules/', '/infra/'],
   collectCoverageFrom: [
     'lib/**/*.ts',
     'components/**/*.tsx',
