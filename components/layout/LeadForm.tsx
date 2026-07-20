@@ -1,23 +1,40 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export function LeadForm() {
   const [sent, setSent] = useState(false)
   const [consent, setConsent] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const successRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (sent) {
+      successRef.current?.focus()
+    }
+  }, [sent])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(null)
 
+    const form = e.currentTarget
+    const data = new FormData(form)
+    const nombre = String(data.get('nombre') ?? '').trim()
+    const email = String(data.get('email') ?? '').trim()
+
+    if (!nombre) {
+      setError('El campo Nombre es obligatorio.')
+      return
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Introduce un correo electrónico válido.')
+      return
+    }
     if (!consent) {
       setError('Debes aceptar el tratamiento de tus datos para continuar.')
       return
     }
-
-    const form = e.currentTarget
-    const data = new FormData(form)
 
     const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
       method: 'POST',
@@ -35,7 +52,9 @@ export function LeadForm() {
   if (sent) {
     return (
       <div
+        ref={successRef}
         role="status"
+        tabIndex={-1}
         className="rounded-2xl border border-green-200 bg-green-50 p-6 text-center text-green-900"
       >
         <p className="text-lg font-semibold">¡Mensaje enviado!</p>

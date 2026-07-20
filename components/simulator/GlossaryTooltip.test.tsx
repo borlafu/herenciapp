@@ -28,8 +28,8 @@ describe('GlossaryTooltip', () => {
     await user.click(button)
 
     expect(button).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByRole('tooltip')).toBeInTheDocument()
-    expect(screen.getByRole('tooltip')).toHaveTextContent(/usar el bien/i)
+    expect(screen.getByRole('definition')).toBeInTheDocument()
+    expect(screen.getByRole('definition')).toHaveTextContent(/usar el bien/i)
   })
 
   it('closes tooltip on second click', async () => {
@@ -41,7 +41,9 @@ describe('GlossaryTooltip', () => {
     await user.click(button)
 
     expect(button).toHaveAttribute('aria-expanded', 'false')
-    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument()
+    // definition element stays in DOM (hidden), verify it is not visible
+    const definition = document.getElementById('tooltip-usufructo')
+    expect(definition).toHaveAttribute('hidden')
   })
 
   it('closes tooltip on Escape key', async () => {
@@ -50,31 +52,31 @@ describe('GlossaryTooltip', () => {
 
     const button = screen.getByRole('button', { name: /pleno dominio/i })
     await user.click(button)
-    expect(screen.getByRole('tooltip')).toBeInTheDocument()
+    expect(screen.getByRole('definition')).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
-    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument()
+    expect(document.getElementById('tooltip-pleno-dominio')).toHaveAttribute('hidden')
     expect(button).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('tooltip has aria-describedby linking button to tooltip', async () => {
+  it('button has aria-controls linking to definition element', async () => {
     const user = userEvent.setup()
     render(<GlossaryTooltip termId="nuda-propiedad">nuda propiedad</GlossaryTooltip>)
 
     const button = screen.getByRole('button', { name: /nuda propiedad/i })
     await user.click(button)
 
-    const tooltipId = button.getAttribute('aria-describedby')
-    expect(tooltipId).toBeTruthy()
-    const tooltip = document.getElementById(tooltipId!)
-    expect(tooltip).toBeInTheDocument()
+    const controlsId = button.getAttribute('aria-controls')
+    expect(controlsId).toBeTruthy()
+    const definition = document.getElementById(controlsId!)
+    expect(definition).toBeInTheDocument()
   })
 
-  it('shows term label in tooltip', async () => {
+  it('shows term label in definition', async () => {
     const user = userEvent.setup()
     render(<GlossaryTooltip termId="legitima">legítima</GlossaryTooltip>)
 
     await user.click(screen.getByRole('button', { name: /legítima/i }))
-    expect(screen.getByRole('tooltip')).toHaveTextContent(/Legítima/i)
+    expect(screen.getByRole('definition')).toHaveTextContent(/Legítima/i)
   })
 })

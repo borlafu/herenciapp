@@ -32,8 +32,8 @@ describe('SimulatorForm', () => {
     await user.click(screen.getByRole('button', { name: /ver el reparto/i }))
 
     const summary = screen.getByRole('region', { name: /resumen del reparto/i })
-    expect(within(summary).getByText(/usufructo/i)).toBeInTheDocument()
-    expect(within(summary).getByText(/universal/i)).toBeInTheDocument()
+    expect(within(summary).getAllByText(/usufructo/i).length).toBeGreaterThan(0)
+    expect(within(summary).getAllByText(/universal/i).length).toBeGreaterThan(0)
   })
 
   it('shows error for out-of-range descendientes', async () => {

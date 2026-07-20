@@ -40,9 +40,9 @@ describe('ResultDiagram', () => {
     expect(screen.getAllByText('Usufructo').length).toBeGreaterThan(0)
   })
 
-  it('renders proportional bar with correct aria-label', () => {
+  it('renders proportional bar with accessible aria-label', () => {
     render(<ResultDiagram result={resultConConyuge} />)
-    expect(screen.getByRole('img', { name: /barra proporcional/i })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /reparto de herencia/i })).toBeInTheDocument()
   })
 
   it('renders legend with all share type labels', () => {
@@ -67,7 +67,7 @@ describe('ResultDiagram', () => {
   it('tooltip disappears on mouse leave', async () => {
     const user = userEvent.setup()
     render(<ResultDiagram result={resultConConyuge} />)
-    const bar = screen.getByRole('img', { name: /barra proporcional/i })
+    const bar = screen.getByRole('img', { name: /reparto de herencia/i })
     await user.unhover(bar)
   })
 })

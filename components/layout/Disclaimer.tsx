@@ -1,7 +1,6 @@
 export default function Disclaimer() {
   return (
     <footer
-      role="note"
       aria-label="Aviso legal"
       className="w-full bg-amber-50 border-t border-amber-200 px-4 py-3 text-sm text-amber-900"
     >
