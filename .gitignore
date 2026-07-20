@@ -40,6 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# CDK
+/infra/node_modules
+/infra/dist
+/infra/cdk.out
+
 # Claude Code / ECC — agent cache and local settings (not project conventions)
 .claude/.agents/
 .claude/hooks/

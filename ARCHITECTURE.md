@@ -7,20 +7,25 @@ El MVP se construye **sin backend propio**. El motor de cálculo del reparto es 
 ## 2. Arquitectura del MVP (Fase 1)
 
 ```
-Usuario → CloudFront (CDN) → S3 (sitio estático SSG: Astro/Next.js)
+Usuario → CloudFront (CDN) → S3 (sitio estático SSG: Next.js)
                               └─ Motor de cálculo (TypeScript, cliente)
-                              └─ Diagrama de reparto (Canvas/SVG, cliente)
+                              └─ Diagrama de reparto (SVG/JSX, cliente)
                               └─ Ads (AdSense/Ad Manager, tags JS de terceros)
                               └─ Formulario de leads → Formspree/Formcarry (externo)
 ```
 
-- **Frontend:** Astro o Next.js en modo SSG (Static Site Generation). TypeScript estricto.
-- **Motor de cálculo (`inheritance-engine`):** módulo TypeScript aislado, testeado, sin dependencias externas, ejecutado 100% en el navegador.
+- **Frontend:** Next.js 16 en modo SSG (Static Site Generation), React 19, TypeScript estricto, Tailwind CSS 4.
+- **Motor de cálculo (`lib/inheritance-engine`):** módulo TypeScript aislado, testeado con Jest, sin dependencias externas, ejecutado 100% en el navegador. Entradas y salidas tipadas en `types.ts`; lógica de reparto en `calculator.ts`.
+- **Glosario:** módulo independiente en `lib/glossary.ts`, reutilizado por el tooltip de términos jurídicos.
+- **Componentes UI:**
+  - `components/simulator/` — `SimulatorForm`, `ResultDiagram`, `ResultSummary`, `GlossaryTooltip`.
+  - `components/layout/` — `Disclaimer`, `LeadForm`.
+  - `app/` — App Router de Next.js: `layout.tsx`, `page.tsx`.
 - **Hosting:** Amazon S3 (bucket privado) + CloudFront (distribución con OAC) + Route 53 (DNS) + ACM (certificado TLS).
 - **Leads:** formulario HTML que envía a un servicio externo (Formspree o Formcarry), GDPR-compliant por diseño, sin backend propio.
 - **Ads:** integración directa de tags de AdSense/Ad Manager en el HTML estático, respetando el CMP de consentimiento.
 - **Infraestructura como código:** AWS CDK (TypeScript), un único stack `WebAppStack` con bucket S3, distribución CloudFront, y configuración de dominio.
-- **CI/CD:** GitHub Actions — build del sitio estático, tests del motor de cálculo, `cdk synth`/`diff`/`deploy`.
+- **CI/CD:** GitHub Actions — lint (ESLint), typecheck (`tsc --noEmit`), tests con cobertura (`jest --ci --coverage`), build (`next build`). Pipeline obligatorio en cada PR y push a `main`.
 
 ### Justificación de "sin backend"
 
@@ -99,6 +104,10 @@ Partner → CloudFront → S3 (portal de partners, SPA separada o ruta protegida
 | Decisión | Alternativa considerada | Motivo |
 |---|---|---|
 | Sin backend en MVP | Lambda + API desde el inicio | Minimizar coste/complejidad; el cálculo no lo requiere |
+| Next.js (App Router, SSG) | Astro | Next.js ya confirmado en el MVP inicial; ecosistema React más familiar |
+| pnpm | npm/yarn | Instalaciones rápidas, workspace overrides para auditorías de seguridad de dependencias |
+| Tailwind CSS 4 | CSS Modules / styled-components | Utilidad-first alineada con rapidez de prototipado |
+| Jest + Testing Library | Vitest | Integración directa con Next.js y ts-jest; sin migración pendiente |
 | Servicio externo de formularios para leads | Backend propio de leads | Evitar construir infraestructura antes de validar demanda |
 | CDK (TypeScript) | Terraform | Coherencia de lenguaje con el resto del stack, mismo repositorio |
 | S3 + CloudFront | Vercel/Netlify | Control total de infraestructura vía CDK, coherente con el resto de fases en AWS |

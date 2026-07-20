@@ -1,0 +1,45 @@
+name: Infra CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'infra/**'
+
+jobs:
+  infra-ci:
+    name: CDK Synth · Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install root dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Next.js app
+        run: pnpm run build
+
+      - name: Install infra dependencies
+        run: npm ci
+        working-directory: infra
+
+      - name: CDK Synth
+        run: npx cdk synth
+        working-directory: infra
+        env:
+          CDK_DEFAULT_ACCOUNT: '000000000000'
+          CDK_DEFAULT_REGION: 'us-east-1'
+
+      - name: Test
+        run: npx jest
+        working-directory: infra
