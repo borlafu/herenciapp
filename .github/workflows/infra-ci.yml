@@ -30,7 +30,7 @@ jobs:
         run: pnpm run build
 
       - name: Install infra dependencies
-        run: npm ci
+        run: pnpm ci
         working-directory: infra
 
       - name: CDK Synth

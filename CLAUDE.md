@@ -6,7 +6,7 @@ Este proyecto usa **AGENTS.md** como fuente única de verdad para convenciones, 
 
 ## Notas específicas para Claude Code
 
-- Ejecuta siempre `npm run lint` y `npm run test` antes de proponer un commit.
+- Ejecuta siempre `pnpm run lint` y `pnpm run test` antes de proponer un commit.
 - Al abrir una rama, usa el prefijo correcto (`feat/`, `fix/`, `chore/`) seguido del número de issue de GitHub, según lo definido en `AGENTS.md`, sección 4.
 - Nunca hagas commit directo a `main`. Trabaja siempre contra una rama de feature y abre un Pull Request.
 - Si el cambio afecta al motor de cálculo (`inheritance-engine`), añade o actualiza los tests correspondientes antes de dar la tarea por terminada.
